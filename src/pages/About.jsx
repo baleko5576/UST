@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Target,
   Eye,
@@ -48,33 +49,33 @@ const About = () => {
     { year: "2023", event: "Expanded partnerships to over 500 companies nationwide" },
   ];
 
-  // Initialize AOS animations
-  AOS.init({
-    duration: 1200, // Increased duration for smoother animations
-    easing: 'ease-in-out',
-    once: true,
-    delay: 100,
-  });
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: "ease-in-out-cubic",
+      once: false,
+      mirror: true,
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background dark:bg-background text-foreground dark:text-foreground transition-colors duration-300">
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/20 dark:to-secondary/20" />
+      <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 transition-colors duration-300" />
         <div className="container-narrow section-padding !py-0 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent rounded-full text-sm font-medium mb-6 animate-fade-up" data-aos="fade-up">
+            <span data-aos="fade-down" className="inline-block px-4 py-1.5 bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent rounded-full text-sm font-medium mb-6">
               About Us
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100" data-aos="fade-up" data-aos-delay="100">
-              Empowering Careers,<span className="text-gradient"> Building Futures</span>
+            <h1 data-aos="fade-up" data-aos-delay="100" className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">
+              Empowering Careers,
+              <span className="text-gradient"> Building Futures</span>
             </h1>
-            <p className="text-lg text-muted-foreground dark:text-muted-foreground/80 animate-fade-up animation-delay-200" data-aos="fade-up" data-aos-delay="200">
-              Unemployment Solution Trust is dedicated to bridging the gap between talented 
-              individuals and meaningful employment opportunities through innovative 
-              skill-based matching and comprehensive career support.
+            <p data-aos="fade-up" data-aos-delay="200" className="text-lg md:text-xl text-muted-foreground dark:text-muted-foreground/80 mb-8">
+              Unemployment Solution Trust is dedicated to bridging the gap between talented individuals and meaningful employment opportunities through innovative skill-based matching and comprehensive career support.
             </p>
           </div>
         </div>
