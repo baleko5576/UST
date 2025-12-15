@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Search, MapPin, Briefcase, Clock, DollarSign, Building2, Filter, ChevronDown } from "lucide-react";
+import { Search, MapPin, Briefcase, Clock, DollarSign, Building2, Filter, ChevronDown, ChevronRight } from "lucide-react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const jobListings = [
     {
@@ -92,6 +94,14 @@ const Jobs = () => {
     const [selectedType, setSelectedType] = useState("All Types");
     const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100, // Start animating 100px before it enters the viewport
+        });
+    }, []);
+
     const filteredJobs = jobListings.filter((job) => {
         const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -119,23 +129,23 @@ const Jobs = () => {
             <Header />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
+            <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/20 dark:to-secondary/20" />
                 <div className="container-narrow section-padding !py-0 relative">
                     <div className="max-w-3xl mx-auto text-center">
-                        <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent dark:bg-accent/20 rounded-full text-sm font-medium mb-6 animate-fade-up">
+                        <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent dark:bg-accent/20 rounded-full text-sm font-medium mb-6">
                             Find Jobs
                         </span>
-                        <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100">
+                        <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">
                             Find Your
                             <span className="text-gradient"> Perfect Job</span>
                         </h1>
-                        <p className="text-lg text-muted-foreground dark:text-gray-300 animate-fade-up animation-delay-200">
+                        <p className="text-lg text-muted-foreground dark:text-gray-300">
                             Browse thousands of job opportunities matched to your skills and experience
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg p-4 mt-10 shadow-lg">
+                        <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg p-4 mt-10 shadow-lg" data-aos="fade-up" data-aos-delay="200">
                             <div className="flex flex-col md:flex-row gap-4">
                                 <div className="flex-1 relative">
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-300" />
@@ -147,7 +157,7 @@ const Jobs = () => {
                                         className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-100"
                                     />
                                 </div>
-                                <button className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 dark:bg-blue-700 dark:hover:bg-blue-600">
+                                <button className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2 dark:bg-blue-700 dark:hover:bg-blue-600">
                                     <Search className="h-4 w-4" />
                                     Search Jobs
                                 </button>
@@ -158,10 +168,10 @@ const Jobs = () => {
             </section>
 
             {/* Filters & Listings */}
-            <section className="pb-12 pt-5 px-4 flex-1" >
+            <section className="pb-12 pt-5 px-4 flex-1" data-aos="fade-up" data-aos-delay="300">
                 <div className="container mx-auto">
                     {/* Filters */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-8 shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-8 shadow-sm border border-gray-200 dark:border-gray-700" data-aos="fade-up" data-aos-delay="400">
                         <div className="flex items-center gap-2 mb-4">
                             <Filter className="h-5 w-5 text-gray-500 dark:text-gray-300" />
                             <span className="font-medium text-gray-700 dark:text-gray-200">Filters</span>
@@ -208,24 +218,15 @@ const Jobs = () => {
                         </div>
                     </div>
 
-                    {/* Results Count */}
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        Showing{" "}
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">
-                            {(currentPage - 1) * JOBS_PER_PAGE + 1} -{" "}
-                            {Math.min(currentPage * JOBS_PER_PAGE, filteredJobs.length)}
-                        </span>{" "}
-                        of{" "}
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">
-                            {filteredJobs.length}
-                        </span>{" "}
-                        jobs
-                    </p>
-
                     {/* Job Listings */}
                     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-                        {paginatedJobs.map((job) => (
-                            <div key={job.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                        {paginatedJobs.map((job, index) => (
+                            <div
+                                key={job.id}
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:scale-105 transition-all duration-300"
+                                data-aos="fade-up"
+                                data-aos-delay={500 + index * 100} // Add delay for each job listing
+                            >
                                 {/* Card Header */}
                                 <div className="p-6 pb-4">
                                     <div className="flex flex-col gap-4">
@@ -265,7 +266,10 @@ const Jobs = () => {
                                     </div>
                                     <div className="flex flex-wrap gap-2 mt-4">
                                         {job.skills.map((skill) => (
-                                            <span key={skill} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-200">
+                                            <span
+                                                key={skill}
+                                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-200 transition-all duration-300 hover:scale-105"
+                                            >
                                                 {skill}
                                             </span>
                                         ))}
@@ -274,8 +278,8 @@ const Jobs = () => {
 
                                 {/* Card Footer */}
                                 <div className="px-6 pb-6">
-                                    <button className="px-6 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
-                                        Apply Now
+                                    <button className="px-6 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-300 flex items-center justify-center gap-2">
+                                        Apply Now <ChevronRight className="h-4 w-4" />
                                     </button>
                                 </div>
                             </div>
@@ -286,7 +290,7 @@ const Jobs = () => {
                         <div className="text-center py-12">
                             <p className="text-gray-500 dark:text-gray-400 text-lg">No jobs found matching your criteria.</p>
                             <button
-                                className="mt-4 px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                className="mt-4 px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                                 onClick={() => {
                                     setSearchTerm("");
                                     setSelectedCategory("All");

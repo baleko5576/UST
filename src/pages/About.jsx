@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const About = () => {
   const values = [
@@ -46,6 +48,14 @@ const About = () => {
     { year: "2023", event: "Expanded partnerships to over 500 companies nationwide" },
   ];
 
+  // Initialize AOS animations
+  AOS.init({
+    duration: 1200, // Increased duration for smoother animations
+    easing: 'ease-in-out',
+    once: true,
+    delay: 100,
+  });
+
   return (
     <div className="min-h-screen bg-background dark:bg-background text-foreground dark:text-foreground transition-colors duration-300">
       <Header />
@@ -55,13 +65,13 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/20 dark:to-secondary/20" />
         <div className="container-narrow section-padding !py-0 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent rounded-full text-sm font-medium mb-6 animate-fade-up">
+            <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent rounded-full text-sm font-medium mb-6 animate-fade-up" data-aos="fade-up">
               About Us
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100" data-aos="fade-up" data-aos-delay="100">
               Empowering Careers,<span className="text-gradient"> Building Futures</span>
             </h1>
-            <p className="text-lg text-muted-foreground dark:text-muted-foreground/80 animate-fade-up animation-delay-200">
+            <p className="text-lg text-muted-foreground dark:text-muted-foreground/80 animate-fade-up animation-delay-200" data-aos="fade-up" data-aos-delay="200">
               Unemployment Solution Trust is dedicated to bridging the gap between talented 
               individuals and meaningful employment opportunities through innovative 
               skill-based matching and comprehensive career support.
@@ -74,7 +84,7 @@ const About = () => {
       <section className="section-padding bg-muted dark:bg-muted/20 transition-colors duration-300">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            <div className="card-elevated p-8 lg:p-10 dark:bg-gray-800 transition-colors duration-300">
+            <div className="card-elevated p-8 lg:p-10 dark:bg-gray-800 transition-colors duration-300" data-aos="fade-right">
               <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mb-6">
                 <Target className="w-7 h-7 text-primary-foreground" />
               </div>
@@ -84,7 +94,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="card-elevated p-8 lg:p-10 dark:bg-gray-800 transition-colors duration-300">
+            <div className="card-elevated p-8 lg:p-10 dark:bg-gray-800 transition-colors duration-300" data-aos="fade-left" data-aos-delay="200">
               <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6">
                 <Eye className="w-7 h-7 text-secondary-foreground" />
               </div>
@@ -100,7 +110,7 @@ const About = () => {
       {/* Our Values */}
       <section className="section-padding">
         <div className="container-narrow">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-16" data-aos="zoom-in">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Our Foundation</span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 mb-4">Core Values That Guide Us</h2>
             <p className="text-muted-foreground dark:text-muted-foreground/80">These principles shape every decision we make and every service we provide</p>
@@ -108,9 +118,9 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <div key={index} className="text-center p-6">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-8 h-8 text-primary" />
+              <div key={index} className="text-center p-6" data-aos="flip-left" data-aos-delay={index * 150}>
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 transform hover:scale-125 hover:rotate-12 hover:shadow-xl hover:bg-primary/20 hover:text-primary-foreground">
+                  <value.icon className="w-8 h-8 text-primary transition-all duration-300" />
                 </div>
                 <h3 className="font-heading text-lg font-semibold mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground/80 leading-relaxed">{value.description}</p>
@@ -123,7 +133,7 @@ const About = () => {
       {/* Impact Stats */}
       <section className="section-padding bg-primary dark:bg-primary/90 transition-colors duration-300">
         <div className="container-narrow">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Our Impact</span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mt-2 mb-4">Making a Real Difference</h2>
             <p className="text-primary-foreground/80">Our commitment to reducing unemployment has created measurable change</p>
@@ -131,45 +141,10 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {impactStats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">{stat.value}</div>
+              <div key={index} className="text-center" data-aos="zoom-in" data-aos-delay={index * 150}>
+                <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2 transition-transform duration-300 hover:scale-110 hover:text-primary-foreground">{stat.value}</div>
                 <div className="font-medium text-primary-foreground mb-1">{stat.label}</div>
                 <div className="text-sm text-primary-foreground/70">{stat.description}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
- {/* Our Story Timeline */}
-      <section className="section-padding">
-        <div className="container-narrow">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">Our Journey</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Milestones Along the Way
-            </h2>
-            <p className="text-muted-foreground">
-              From humble beginnings to a nationwide impact
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            {milestones.map((milestone, index) => (
-              <div key={index} className="flex gap-6 mb-8 last:mb-0">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shrink-0">
-                    <span className="font-heading font-bold text-primary-foreground text-sm">
-                      {milestone.year}
-                    </span>
-                  </div>
-                  {index < milestones.length - 1 && (
-                    <div className="w-0.5 h-full bg-border mt-2" />
-                  )}
-                </div>
-                <div className="card-elevated p-5 flex-1">
-                  <p className="text-foreground">{milestone.event}</p>
-                </div>
               </div>
             ))}
           </div>
@@ -179,58 +154,25 @@ const About = () => {
       {/* Leadership Team */}
       <section className="section-padding bg-muted">
         <div className="container-narrow">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Leadership</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-muted-foreground">
-              Dedicated professionals committed to your career success
-            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">Meet Our Team</h2>
+            <p className="text-muted-foreground">Dedicated professionals committed to your career success</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {teamMembers.map((member, index) => (
-              <div key={index} className="card-elevated p-6 text-center">
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="card-elevated p-6 text-center" data-aos="flip-right" data-aos-delay={index * 200}>
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 hover:scale-110 hover:shadow-xl">
                   <span className="font-heading text-2xl font-bold text-primary">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
-                  {member.name}
-                </h3>
+                <h3 className="font-heading text-lg font-semibold text-foreground mb-1">{member.name}</h3>
                 <div className="text-sm text-accent font-medium mb-3">{member.role}</div>
                 <p className="text-sm text-muted-foreground">{member.bio}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding">
-        <div className="container-narrow">
-          <div className="card-elevated p-8 md:p-12 lg:p-16 text-center bg-gradient-to-br from-primary to-primary/90">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Join Our Mission
-            </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Whether you're a job seeker looking for opportunities or an employer 
-              wanting to find great talent, we're here to help you succeed.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/services" className="btn-accent w-full sm:w-auto">
-                Explore Services
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-              <Link
-                to="/"
-                className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary-foreground text-primary-foreground font-medium rounded-lg transition-all duration-300 hover:bg-primary-foreground hover:text-primary w-full sm:w-auto"
-              >
-                Back to Home
-              </Link>
-            </div>
           </div>
         </div>
       </section>

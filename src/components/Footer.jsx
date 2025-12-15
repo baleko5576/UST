@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Briefcase, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,14 +11,16 @@ const Footer = () => {
       <div className="container-narrow section-padding !pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-accent-foreground" />
+          <div className="lg:col-span-1" data-aos="fade-up">
+            <Link to="/" className="flex items-center gap-3 mb-4 group">
+              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                <Briefcase className="w-5 h-5 text-accent-foreground group-hover:text-accent-foreground/80 transition-colors" />
               </div>
               <div>
-                <span className="font-heading text-lg font-semibold">UST</span>
-                <span className="block text-xs opacity-70 -mt-1">
+                <span className="font-heading text-lg font-semibold transition-colors duration-300 group-hover:text-accent">
+                  UST
+                </span>
+                <span className="block text-xs opacity-70 -mt-1 transition-colors duration-300 group-hover:text-accent/80">
                   Unemployment Solution Trust
                 </span>
               </div>
@@ -28,7 +32,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200">
             <h4 className="font-heading text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3">
               {[
@@ -40,7 +44,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm opacity-80 hover:opacity-100 hover:text-accent transition-all"
+                    className="text-sm opacity-80 hover:opacity-100 hover:text-accent transition-all duration-300 transform hover:scale-105"
                   >
                     {link.label}
                   </Link>
@@ -50,7 +54,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="400">
             <h4 className="font-heading text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-3">
               {[
@@ -68,7 +72,7 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="600">
             <h4 className="font-heading text-lg font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
@@ -79,13 +83,13 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 opacity-80 shrink-0" />
-                <a className="text-sm opacity-80 hover:underline hover:text-yellow-500" href="tel:+919999999999">
+                <a className="text-sm opacity-80 hover:underline hover:text-yellow-500 transition-colors duration-300" href="tel:+919999999999">
                   +91 9999999999
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 opacity-80 shrink-0" />
-                <a className="text-sm opacity-80 hover:underline hover:text-yellow-500" href="mailto: info@ust.in">info@ust.in</a>
+                <a className="text-sm opacity-80 hover:underline hover:text-yellow-500 transition-colors duration-300" href="mailto: info@ust.in">info@ust.in</a>
               </li>
             </ul>
 
@@ -95,9 +99,9 @@ const Footer = () => {
                 <a
                   key={index}
                   href="#"
-                  className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4 transition-all duration-300" />
                 </a>
               ))}
             </div>
@@ -111,10 +115,16 @@ const Footer = () => {
               © {currentYear} Unemployment Solution Trust. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+              <a
+                href="#"
+                className="text-sm opacity-70 hover:opacity-100 hover:text-accent transition-opacity duration-300"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+              <a
+                href="#"
+                className="text-sm opacity-70 hover:opacity-100 hover:text-accent transition-opacity duration-300"
+              >
                 Terms of Service
               </a>
             </div>

@@ -1,12 +1,24 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { 
+import {
   Users, Target, Award, TrendingUp, CheckCircle, ArrowRight,
   Briefcase, GraduationCap, FileText, Handshake, Star, Building2
 } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: "ease-in-out-cubic",
+      once: false,
+      mirror: true,
+    });
+  }, []);
+
   const stats = [
     { value: "50,000+", label: "Jobs Posted", icon: Briefcase },
     { value: "35,000+", label: "Successful Placements", icon: Users },
@@ -40,26 +52,26 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
-         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 transition-colors duration-300" /> {/* dark:from-primary/20 dark:to-secondary/20 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 transition-colors duration-300" />
         <div className="container-narrow section-padding !py-0 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent rounded-full text-sm font-medium mb-6 animate-fade-up">
+            <span data-aos="fade-down" className="inline-block px-4 py-1.5 bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent rounded-full text-sm font-medium mb-6">
               Empowering Careers, Transforming Lives
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100">
+            <h1 data-aos="fade-up" data-aos-delay="100" className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               Find Your Perfect Job Based on
               <span className="text-gradient"> Your Skills</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground dark:text-muted-foreground/80 mb-8 animate-fade-up animation-delay-200">
-              Unemployment Solution Trust connects talented job seekers with employers 
+            <p data-aos="fade-up" data-aos-delay="200" className="text-lg md:text-xl text-muted-foreground dark:text-muted-foreground/80 mb-8">
+              Unemployment Solution Trust connects talented job seekers with employers
               through intelligent skill-based matching. Your next opportunity awaits.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-300">
-              <Link to="/jobs" className="btn-accent w-full sm:w-auto">
+            <div data-aos="fade-up" data-aos-delay="300" className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to="/jobs" className="btn-accent w-full sm:w-auto hover:scale-105 transition-transform duration-300">
                 Find Jobs Now
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
-              <Link to="/about" className="btn-outline w-full sm:w-auto">
+              <Link to="/about" className="btn-outline w-full sm:w-auto hover:scale-105 transition-transform duration-300">
                 Learn More
               </Link>
             </div>
@@ -72,7 +84,7 @@ const Home = () => {
         <div className="container-narrow section-padding !py-0">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} data-aos="fade-up" data-aos-delay={index * 100} className="text-center hover:scale-105 transition-transform duration-300">
                 <stat.icon className="w-8 h-8 text-accent mx-auto mb-3" />
                 <div className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-1">
                   {stat.value}
@@ -91,14 +103,14 @@ const Home = () => {
             <span className="text-accent font-medium text-sm uppercase tracking-wider">What We Offer</span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 mb-4">Comprehensive Employment Solutions</h2>
             <p className="text-muted-foreground dark:text-muted-foreground/80">
-              We provide end-to-end support for your career journey, from skill assessment 
+              We provide end-to-end support for your career journey, from skill assessment
               to job placement and beyond.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="card-elevated p-6 lg:p-8 dark:bg-gray-800 transition-colors duration-300 group">
+              <div key={index} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"} className="card-elevated p-6 lg:p-8 dark:bg-gray-800 transition-colors duration-300 group hover:-translate-y-2 hover:shadow-xl">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
                   <feature.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
                 </div>
@@ -121,16 +133,16 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {steps.map((step, index) => (
-              <div key={index} className="relative text-center">
+              <div key={index} data-aos="flip-left" className="relative text-center hover:-translate-y-2 transition-transform duration-300">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground font-heading text-xl font-bold mb-4">
                   {step.step}
                 </div>
                 <h3 className="font-heading text-lg font-semibold mb-2">{step.title}</h3>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground/80">{step.description}</p>
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] border-t-2 border-dashed border-border dark:border-gray-600" />
+                  <div data-aos="fade-left" className="hidden lg:block absolute top-8 left-[60%] w-[80%] border-t-2 border-dashed border-border dark:border-gray-600" />
                 )}
               </div>
             ))}
@@ -138,7 +150,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials Section */}
       <section className="section-padding">
         <div className="container-narrow">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -151,7 +163,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="card-elevated p-6 lg:p-8 dark:bg-gray-800 transition-colors duration-300">
+              <div key={index} data-aos="zoom-in-up" className="card-elevated p-6 lg:p-8 dark:bg-gray-800 transition-colors duration-300 hover:-translate-y-2 hover:shadow-xl">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-accent text-accent" />
@@ -176,14 +188,14 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section-padding bg-primary dark:bg-primary/90 transition-colors duration-300">
         <div className="container-narrow">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Ready to Start Your Career Journey?</h2>
             <p className="text-lg text-primary-foreground/80 mb-8">
-              Join thousands of job seekers who have found their dream jobs through 
+              Join thousands of job seekers who have found their dream jobs through
               Unemployment Solution Trust. Your next opportunity is just a click away.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/jobs" className="btn-accent w-full sm:w-auto">
+              <Link to="/jobs" className="btn-accent w-full sm:w-auto hover:scale-105 transition-transform duration-300">
                 Browse Jobs
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
