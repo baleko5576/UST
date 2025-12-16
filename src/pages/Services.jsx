@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Briefcase,
   GraduationCap,
@@ -15,17 +16,29 @@ import {
   Palette,
   Truck,
   Wrench,
-  Calculator
+  Calculator,
 } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Services = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: "ease-out-cubic",
+      once: false,
+      mirror: true,
+    });
+  }, []);
+
   const services = [
     {
       icon: Briefcase,
       title: "Job Matching",
-      description: "Our AI-powered platform analyzes your skills, experience, and preferences to match you with the most suitable job opportunities from our extensive database.",
+      description:
+        "Our AI-powered platform analyzes your skills, experience, and preferences to match you with the most suitable job opportunities from our extensive database.",
       features: [
         "Skill-based algorithm matching",
         "Personalized job recommendations",
@@ -36,7 +49,8 @@ const Services = () => {
     {
       icon: GraduationCap,
       title: "Skill Development",
-      description: "Access free training programs and certifications to enhance your employability and stay competitive in today's job market.",
+      description:
+        "Access free training programs and certifications to enhance your employability and stay competitive in today's job market.",
       features: [
         "Industry-recognized certifications",
         "Online and in-person workshops",
@@ -47,7 +61,8 @@ const Services = () => {
     {
       icon: FileText,
       title: "Resume Building",
-      description: "Get professional assistance in creating a compelling resume that effectively showcases your qualifications and catches employers' attention.",
+      description:
+        "Get professional assistance in creating a compelling resume that effectively showcases your qualifications and catches employers' attention.",
       features: [
         "Professional resume templates",
         "One-on-one resume reviews",
@@ -58,7 +73,8 @@ const Services = () => {
     {
       icon: MessageSquare,
       title: "Interview Preparation",
-      description: "Prepare for your interviews with mock sessions, expert tips, and comprehensive resources to help you make a strong impression.",
+      description:
+        "Prepare for your interviews with mock sessions, expert tips, and comprehensive resources to help you make a strong impression.",
       features: [
         "Mock interview sessions",
         "Industry-specific questions",
@@ -69,7 +85,8 @@ const Services = () => {
     {
       icon: Users,
       title: "Career Counseling",
-      description: "Receive personalized guidance from experienced career counselors who understand the job market and can help you make informed decisions.",
+      description:
+        "Receive personalized guidance from experienced career counselors who understand the job market and can help you make informed decisions.",
       features: [
         "One-on-one counseling sessions",
         "Career path planning",
@@ -80,7 +97,8 @@ const Services = () => {
     {
       icon: Lightbulb,
       title: "Entrepreneurship Support",
-      description: "For those interested in self-employment, we offer resources and guidance to help you start and grow your own business.",
+      description:
+        "For those interested in self-employment, we offer resources and guidance to help you start and grow your own business.",
       features: [
         "Business plan development",
         "Startup resources",
@@ -105,68 +123,95 @@ const Services = () => {
     {
       number: "01",
       title: "Complete Your Profile",
-      description: "Sign up and fill in your professional details including skills, experience, education, and job preferences.",
+      description:
+        "Sign up and fill in your professional details including skills, experience, education, and job preferences.",
     },
     {
       number: "02",
       title: "Get Skill Assessment",
-      description: "Take our comprehensive skill assessment to identify your strengths and areas for improvement.",
+      description:
+        "Take our comprehensive skill assessment to identify your strengths and areas for improvement.",
     },
     {
       number: "03",
       title: "Receive Matched Jobs",
-      description: "Our AI system matches your profile with suitable job openings and sends personalized recommendations.",
+      description:
+        "Our AI system matches your profile with suitable job openings and sends personalized recommendations.",
     },
     {
       number: "04",
       title: "Apply & Interview",
-      description: "Apply to positions with one click and use our interview prep resources to ace your interviews.",
+      description:
+        "Apply to positions with one click and use our interview prep resources to ace your interviews.",
     },
     {
       number: "05",
       title: "Land Your Dream Job",
-      description: "Get hired and start your new career journey with ongoing support from our team.",
+      description:
+        "Get hired and start your new career journey with ongoing support from our team.",
     },
   ];
 
   const faqs = [
     {
       question: "Is UST completely free for job seekers?",
-      answer: "Yes! All our services including job matching, skill development programs, resume building, and career counseling are completely free for job seekers.",
+      answer:
+        "Yes! All our services including job matching, skill development programs, resume building, and career counseling are completely free for job seekers.",
     },
     {
       question: "How does the skill-based matching work?",
-      answer: "Our AI-powered system analyzes your skills, experience, certifications, and preferences, then matches them with job requirements from our employer partners to find the best opportunities for you.",
+      answer:
+        "Our AI-powered system analyzes your skills, experience, certifications, and preferences, then matches them with job requirements from our employer partners to find the best opportunities for you.",
     },
     {
       question: "Can I access training programs remotely?",
-      answer: "Absolutely! We offer both online and in-person training programs. Our online courses can be accessed anytime, anywhere, making it convenient for everyone.",
+      answer:
+        "Absolutely! We offer both online and in-person training programs. Our online courses can be accessed anytime, anywhere, making it convenient for everyone.",
     },
     {
       question: "How long does it typically take to find a job?",
-      answer: "The timeline varies based on factors like your field, experience, and market conditions. However, our matched candidates typically find employment within 2-8 weeks.",
+      answer:
+        "The timeline varies based on factors like your field, experience, and market conditions. However, our matched candidates typically find employment within 2-8 weeks.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground dark:bg-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/20 dark:to-secondary/20" />
-        <div className="container-narrow section-padding !py-0 relative">
+      <section className="pt-32 pb-20 md:pt-44 md:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-background to-slate-100" />
+        <div className="absolute top-20 left-20 w-72 h-72 bg-teal-200/40 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-slate-200/60 rounded-full blur-3xl animate-pulse-soft animation-delay-200" />
+
+        <div className="container-narrow relative">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 animate-fade-up dark:bg-accent/20">
+            <span
+              data-aos="fade-down"
+              data-aos-duration="600"
+              className="badge mb-6"
+            >
               Our Services
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100">
+            <h1
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+            >
               Comprehensive Career
               <span className="text-gradient"> Support Services</span>
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up animation-delay-200 dark:text-gray-300">
-              From skill assessment to job placement, we provide everything you need 
-              to succeed in your career journey. All services are completely free.
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="200"
+              className="text-lg md:text-xl text-muted-foreground leading-relaxed"
+            >
+              From skill assessment to job placement, we provide everything you
+              need to succeed in your career journey. All services are
+              completely free.
             </p>
           </div>
         </div>
@@ -177,20 +222,29 @@ const Services = () => {
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, index) => (
-              <div key={index} className="card-elevated p-6 lg:p-8 group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors">
-                  <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-aos-delay={index * 100}
+                className="card-elevated p-6 lg:p-8 group"
+              >
+                <div className="icon-box mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-teal">
+                  <service.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold mb-3 text-foreground dark:text-gray-100">
+                <h3 className="font-heading text-xl font-semibold mb-3">
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed mb-4 text-muted-foreground dark:text-gray-300">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   {service.description}
                 </p>
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground dark:text-gray-300">
-                      <CheckCircle className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
+                      <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -202,15 +256,32 @@ const Services = () => {
       </section>
 
       {/* Job Categories */}
-      <section className="section-padding bg-muted dark:bg-gray-800">
+      <section className="section-padding bg-muted/50">
         <div className="container-narrow">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">Job Categories</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 mb-4 text-foreground dark:text-gray-100">
+            <span
+              data-aos="fade-down"
+              data-aos-duration="600"
+              className="section-badge"
+            >
+              Job Categories
+            </span>
+            <h2
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+            >
               Explore Opportunities by Industry
             </h2>
-            <p className="text-muted-foreground dark:text-gray-300">
-              We partner with employers across all major industries to bring you diverse opportunities
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="200"
+              className="text-muted-foreground text-lg"
+            >
+              We partner with employers across all major industries to bring you
+              diverse opportunities
             </p>
           </div>
 
@@ -218,13 +289,18 @@ const Services = () => {
             {jobCategories.map((category, index) => (
               <div
                 key={index}
-                className="card-elevated p-5 text-center group cursor-pointer bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                data-aos="zoom-in"
+                data-aos-duration="600"
+                data-aos-delay={index * 50}
+                className="card-elevated p-5 text-center group cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary transition-colors">
-                  <category.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="icon-box-outline mx-auto mb-3 group-hover:scale-110 transition-all duration-500">
+                  <category.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-medium mb-1 text-foreground dark:text-gray-100">{category.title}</h3>
-                <span className="text-sm font-medium text-accent dark:text-gray-100">{category.jobs}</span>
+                <h3 className="font-medium mb-1">{category.title}</h3>
+                <span className="text-sm font-medium text-primary">
+                  {category.jobs}
+                </span>
               </div>
             ))}
           </div>
@@ -232,32 +308,59 @@ const Services = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-padding">
-        <div className="container-narrow">
+      <section className="section-padding relative">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-100/50 rounded-full blur-3xl" />
+        <div className="container-narrow relative">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">The Process</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 mb-4 text-foreground dark:text-gray-100">
+            <span
+              data-aos="fade-down"
+              data-aos-duration="600"
+              className="section-badge"
+            >
+              The Process
+            </span>
+            <h2
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+            >
               Your Path to Employment
             </h2>
-            <p className="text-muted-foreground dark:text-gray-300">
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="200"
+              className="text-muted-foreground text-lg"
+            >
               A simple five-step process designed to get you hired quickly
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             {processSteps.map((step, index) => (
-              <div key={index} className="flex gap-6 mb-8 last:mb-0">
+              <div
+                key={index}
+                data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                data-aos-duration="800"
+                data-aos-delay={index * 100}
+                className="flex gap-6 mb-8 last:mb-0 group"
+              >
                 <div className="flex flex-col items-center">
-                  <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center shrink-0">
-                    <span className="font-heading font-bold text-primary-foreground">{step.number}</span>
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shrink-0 shadow-teal group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                    <span className="font-heading font-bold text-white">
+                      {step.number}
+                    </span>
                   </div>
                   {index < processSteps.length - 1 && (
-                    <div className="w-0.5 h-full bg-border mt-2 dark:bg-gray-600" />
+                    <div className="w-0.5 h-full bg-border mt-4" />
                   )}
                 </div>
-                <div className="pb-8">
-                  <h3 className="font-heading text-xl font-semibold mb-2 text-foreground dark:text-gray-100">{step.title}</h3>
-                  <p className="text-muted-foreground dark:text-gray-300">{step.description}</p>
+                <div className="pb-8 pt-3">
+                  <h3 className="font-heading text-xl font-semibold mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-muted-foreground">{step.description}</p>
                 </div>
               </div>
             ))}
@@ -266,23 +369,47 @@ const Services = () => {
       </section>
 
       {/* FAQs */}
-      <section className="section-padding bg-muted dark:bg-gray-800">
+      <section className="section-padding bg-muted/50">
         <div className="container-narrow">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">FAQ</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 mb-4 text-foreground dark:text-gray-100">
+            <span
+              data-aos="fade-down"
+              data-aos-duration="600"
+              className="section-badge"
+            >
+              FAQ
+            </span>
+            <h2
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+            >
               Frequently Asked Questions
             </h2>
-            <p className="text-muted-foreground dark:text-gray-300">
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="200"
+              className="text-muted-foreground text-lg"
+            >
               Find answers to common questions about our services
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="card-elevated p-6 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
-                <h3 className="font-heading text-lg font-semibold mb-2 text-foreground dark:text-gray-100">{faq.question}</h3>
-                <p className="text-muted-foreground dark:text-gray-300">{faq.answer}</p>
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-aos-delay={index * 100}
+                className="card-elevated p-6 group"
+              >
+                <h3 className="font-heading text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                  {faq.question}
+                </h3>
+                <p className="text-muted-foreground">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -290,26 +417,44 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-primary dark:bg-primary/80">
-        <div className="container-narrow">
+      <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-3xl" />
+
+        <div className="container-narrow relative">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary-foreground dark:text-white">
+            <h2
+              data-aos="fade-up"
+              data-aos-duration="800"
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+            >
               Ready to Find Your Perfect Job?
             </h2>
-            <p className="text-lg mb-8 text-primary-foreground/80 dark:text-white/80">
-              Join thousands of job seekers who have successfully found employment 
-              through our skill-based matching platform. Your dream job awaits!
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
+              className="text-xl text-slate-300 mb-10 leading-relaxed"
+            >
+              Join thousands of job seekers who have successfully found
+              employment through our skill-based matching platform. Your dream
+              job awaits!
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/about" className="btn-accent w-full sm:w-auto">
-                Learn About Us
-                <ArrowRight className="w-4 h-4 ml-2" />
+            <div
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="200"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Link to="/jobs" className="btn-accent w-full sm:w-auto group">
+                Browse Jobs
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                to="/"
-                className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary-foreground text-primary-foreground font-medium rounded-lg transition-all duration-300 hover:bg-primary-foreground hover:text-primary w-full sm:w-auto dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-primary"
+                to="/about"
+                className="inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-xl border-2 border-white/20 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300 backdrop-blur-sm w-full sm:w-auto"
               >
-                Back to Home
+                Learn About Us
               </Link>
             </div>
           </div>

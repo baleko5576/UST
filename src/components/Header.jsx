@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Briefcase, Sun, Moon } from "lucide-react"; 
+import { Menu, X, Briefcase } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false); 
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -17,50 +17,66 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     AOS.init({
       duration: 800,
-      easing: "ease-in-out",
+      easing: "ease-out-cubic",
       once: false,
       mirror: true,
     });
   }, []);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border transition-all duration-500">
-      <div className="container-narrow section-padding !py-4">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border/50"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container-narrow py-4">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" data-aos="fade-right">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+          <Link
+            to="/"
+            className="flex items-center gap-3 group"
+            data-aos="fade-right"
+            data-aos-duration="600"
+          >
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-teal group-hover:rotate-3">
               <Briefcase className="w-5 h-5 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <span className="font-heading text-lg font-semibold text-foreground">
+              <span className="font-heading text-xl font-semibold text-foreground tracking-tight">
                 UST
               </span>
-              <span className="block text-xs text-muted-foreground -mt-1">
+              <span className="block text-xs text-muted-foreground -mt-0.5 font-medium">
                 Unemployment Solution Trust
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => (
               <Link
                 key={link.path}
                 to={link.path}
                 data-aos="fade-down"
                 data-aos-delay={index * 100}
-                className={`link-underline text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 ${
+                data-aos-duration="600"
+                className={`link-underline text-sm font-medium transition-all duration-300 hover:text-primary ${
                   isActive(link.path)
                     ? "text-primary"
                     : "text-muted-foreground"
@@ -69,56 +85,59 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <Link 
-              to="/jobs" 
-              className="btn-accent text-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            <Link
+              to="/jobs"
+              className="btn-accent text-sm px-5 py-2.5"
               data-aos="fade-down"
               data-aos-delay={200}
+              data-aos-duration="600"
             >
               Find Jobs
             </Link>
-
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded hover:bg-muted-foreground/10 transition-colors duration-300"
-              aria-label="Toggle Dark Mode"
-              data-aos="fade-down"
-              data-aos-delay={300}
-            >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground transition-transform duration-300 hover:scale-110"
+            className="md:hidden p-2 text-foreground rounded-lg hover:bg-muted transition-all duration-300 hover:scale-110"
             aria-label="Toggle menu"
             data-aos="fade-left"
+            data-aos-duration="600"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <div className="relative w-6 h-6">
+              <Menu
+                className={`w-6 h-6 absolute transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0 rotate-90" : "opacity-100 rotate-0"
+                }`}
+              />
+              <X
+                className={`w-6 h-6 absolute transition-all duration-300 ${
+                  isMenuOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
+                }`}
+              />
+            </div>
           </button>
         </nav>
 
-        
-
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden pt-4 pb-2 animate-fade-in">
-            <div className="flex flex-col gap-4">
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
+            isMenuOpen ? "max-h-80 opacity-100 mt-4" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="bg-card rounded-2xl shadow-xl border border-border/50 p-4">
+            <div className="flex flex-col gap-2">
               {navLinks.map((link, index) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                  className={`text-sm font-medium py-2 transition-all duration-300 hover:text-primary hover:scale-105 ${
+                  className={`text-sm font-medium py-3 px-4 rounded-xl transition-all duration-300 hover:bg-muted hover:text-primary ${
                     isActive(link.path)
-                      ? "text-primary"
+                      ? "text-primary bg-primary/5"
                       : "text-muted-foreground"
                   }`}
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {link.label}
                 </Link>
@@ -126,25 +145,13 @@ const Header = () => {
               <Link
                 to="/jobs"
                 onClick={() => setIsMenuOpen(false)}
-                data-aos="fade-up"
-                data-aos-delay={200}
-                className="btn-accent text-sm text-center mt-2 transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+                className="btn-accent text-sm text-center mt-2"
               >
                 Find Jobs
               </Link>
-
-              {/* Dark Mode Toggle for mobile */}
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 mt-2 rounded hover:bg-muted-foreground/10 transition-colors duration-300 text-center"
-                data-aos="fade-up"
-                data-aos-delay={300}
-              >
-                {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-              </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
